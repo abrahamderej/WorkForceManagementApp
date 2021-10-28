@@ -1,0 +1,6 @@
+# dependencies
+/server/node_modules
+rsa_key
+Desktop
+rsa-hira.pub
+rsa-hira

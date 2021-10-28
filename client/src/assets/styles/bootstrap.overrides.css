@@ -1,0 +1,135 @@
+/* Turn off right justify title in mobile */
+.navbar-brand {
+  margin-right: auto !important;
+}
+.navbar-nav {
+  flex-direction: row;
+}
+
+@media (max-width: 992px) {
+  .navbar-nav li {
+    flex-direction: row;
+    padding: 0px 8px;
+  }
+}
+
+.nav-logo {
+  height: 28px;
+}
+
+@media (max-width: 640px) {
+  .nav-logo {
+    height: 18px;
+    margin-top: -5px;
+  }
+}
+
+.container,
+.container-fluid {
+  margin-top: 20px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.list-group-item {
+  margin-bottom: 8px;
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item:hover {
+  background: #8db7e054;
+}
+.list-group-item + .list-group-item {
+  border-top-width: 1px;
+}
+
+.text-strike {
+  text-decoration: line-through;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.required {
+  border-left: 5px solid #ff9191;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+input[type="checkbox"] {
+  -ms-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.form-check-label {
+  font-size: 14px;
+}
+
+/* Accordion */
+.accordion {
+  border: 1px solid #eee;
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+}
+
+.accordion.noborder {
+  border: 0px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.accordion-header {
+  background: #fff;
+  color: #000;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 300;
+}
+.accordion-header .accordion-chev {
+  color: #4db39d;
+}
+.accordion-container {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  padding: 0px 20px;
+  display: none;
+}
+.accordion-container.open {
+  display: block;
+}
+
+/* Calendar */
+
+.fc-button {
+  background: #8db7e0 !important;
+  border: 0px !important;
+}
+
+.card {
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+}

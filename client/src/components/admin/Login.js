@@ -43,6 +43,8 @@ const Login = () => {
           dispatch(setUserProfile(data));
           console.log("routing to dashboard");
           history.push("/dashboard");
+        } else {
+          console.log("failed");
         }
       }
     );

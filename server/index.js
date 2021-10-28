@@ -43,10 +43,10 @@ app.post("/login", (req, res) => {
     "SELECT * FROM UserRole WHERE username = ? ",
     [username],
     function (error, results, fields) {
-      console.log(results + "results");
+      console.log(JSON.stringify(results) + "results");
       if (results.length > 0) {
-        bcrypt.compare(password, results.password, function (err, res) {
-          if (res == true) {
+        bcrypt.compare(password, results[0].password, function (err, result) {
+          if (result == true) {
             console.log("success");
             res.send(results);
           }

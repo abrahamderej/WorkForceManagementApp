@@ -11,12 +11,16 @@ const userReducer = (
       };
     case "SETUSER":
       return {
-        username: action.payload.username,
+        username: action.payload.userName,
         password: action.payload.password,
         isLogin: true,
       };
     default:
-      return state;
+      return {
+        username: "default",
+        password: "",
+        isLogin: false,
+      };
   }
 };
 

@@ -17,6 +17,7 @@ export const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarDocked, setSidebarDocked] = useState(mql.matches);
   const isLogin = useSelector((state) => state.user.isLogin);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
   console.log(isLogin);
 
@@ -27,18 +28,26 @@ export const Layout = ({ children }) => {
   if (!isLogin) {
     return <Redirect to="./" />;
   }
+
+  const closeSideBar = () => {
+    setSidebarOpen(false);
+    setSidebarDocked(false);
+  };
+
+  const openSideBar = () => {
+    setSidebarOpen(true);
+    setSidebarDocked(true);
+  };
+
   return (
     <AccountProvider value={AccountDefaultState}>
       <Sidebar
-        sidebar={<SideMenu toggleMenu={() => setSidebarOpen(!sidebarOpen)} />}
+        sidebar={<SideMenu toggleMenu={closeSideBar} />}
         open={sidebarOpen}
-        onSetOpen={setSidebarOpen}
+        // onSetOpen={setSidebarOpen}
         docked={sidebarDocked}
       >
-        <Header
-          toggleMenu={() => setSidebarOpen(true)}
-          sideBarOpen={sidebarOpen}
-        />
+        <Header toggleMenu={openSideBar} />
         <div className="container-fluid">{children}</div>
       </Sidebar>
     </AccountProvider>

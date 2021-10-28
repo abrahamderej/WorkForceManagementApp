@@ -8,7 +8,6 @@ import Accordion from "./accordion";
 
 export default ({ toggleMenu, sideBarOpen }) => {
   const username = useSelector((state) => state.user.username);
-  console.log(username + "username");
   //let { accountId, workcenterId } = useParams();
   const accountId = 1;
   const workcenterId = 1;

@@ -51,6 +51,8 @@ app.post("/login", (req, res) => {
             res.send(results);
           }
         });
+      } else {
+        res.send(results);
       }
     }
   );

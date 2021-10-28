@@ -1,19 +1,19 @@
 import React, { Fragment, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import Modal from '../modal'
+import Modal from "../modal";
 
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 export default ({ toggleMenu, toggleSearch, sideBarOpen }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const history = useHistory();
   const handleCompanyDashboard = () => {
-    history.push('/company');
-  }
-  const openLeftSideBar = () =>{
-    
-  }
+    history.push("/company");
+  };
+  const onClickToggle = () => {
+    alert("Toggle Clicked");
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <i
@@ -21,25 +21,22 @@ export default ({ toggleMenu, toggleSearch, sideBarOpen }) => {
         onClick={toggleMenu}
       ></i>
       <NavLink className="navbar-brand" to="/">
-        <img
-          alt="logo"
-          className="nav-logo"
-          src={logo}
-        />
+        <img alt="logo" className="nav-logo" src={logo} />
       </NavLink>
-      <button className="header-btn" onClick={handleCompanyDashboard}>Company</button>
+      <button className="header-btn" onClick={handleCompanyDashboard}>
+        Company
+      </button>
       <button className="header-btn">Client</button>
       <button className="header-btn">Project</button>
       <button className="header-btn">Policy</button>
       <button className="header-btn">Profile</button>
       <button className="header-btn">Users</button>
-      
+
       <Modal
         title="Search procorem..."
         isOpen={isSearchOpen}
         footer={
           <Fragment>
-            
             <button
               type="button"
               style={{ float: "left" }}

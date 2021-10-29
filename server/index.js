@@ -1,49 +1,22 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mysql = require("mysql");
 const bcrypt = require("bcrypt");
-const { response } = require("express");
+const db = require("../server/resources/DbConnection");
 
 app.use(cors());
 app.use(express.json());
 
 var companyModule = require("../server/controller/CompanyController");
 
-const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "password",
-  database: "workforceManagement",
-});
-
-app.get("/clients", (req, res) => {
-  db.query("SELECT * FROM client", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
-
-app.get("/employees", (req, res) => {
-  db.query("SELECT * FROM employees", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
-
+//Login
 app.post("/login", (req, res) => {
   console.log(req);
   const username = req.body.username;
   const password = req.body.password;
   console.log("Inside the api - username: " + username);
 
-  db.query(
+  db.connection.query(
     "SELECT * FROM UserRole WHERE username = ? ",
     [username],
     function (error, results, fields) {
@@ -62,73 +35,60 @@ app.post("/login", (req, res) => {
   );
 });
 
-// profile endpoint
+// UserProfile endpoint
 app.get("/users/:id", (req, res) => {
   const id = parseInt(req.params.id);
   console.log(id + "req query");
-  db.query("SELECT * FROM UserProfile where id =? ", [id], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("user Profile result" + result[0]);
-      res.send(result[0]);
-    }
-  });
-});
-
-app.post("/create", (req, res) => {
-  const name = req.body.name;
-  const age = req.body.age;
-  const country = req.body.country;
-  const position = req.body.position;
-  const wage = req.body.wage;
-
-  db.query(
-    "INSERT INTO employees (name, age, country, position, wage) VALUES(?,?,?,?,?)",
-    [name, age, country, position, wage],
+  db.connection.query(
+    "SELECT * FROM UserProfile where id =? ",
+    [id],
     (err, result) => {
       if (err) {
         console.log(err);
       } else {
-        res.send("values inserted");
+        console.log("user Profile result" + result[0]);
+        res.send(result[0]);
       }
     }
   );
 });
 
 //Company API's
-
 app.post("/company", function (req, res) {
   var postData = req.body;
-  companyModule.postCompanyInfo(postData, db, function (response) {
+  companyModule.postCompanyInfo(postData, db.connection, function (response) {
     res.send(response);
   });
 });
 
 app.put("/company", function (req, res) {
   var postData = req.body;
-  companyModule.updateCompanyInfo(postData, db, function (response) {
+  companyModule.updateCompanyInfo(postData, db.connection, function (response) {
     res.send(response);
   });
 });
 
 app.delete("/company/:id", function (req, res) {
   const companyId = parseInt(req.params.id);
-  companyModule.deleteCompanyInfo(companyId, db, function (response) {
-    res.send(response);
-  });
+  companyModule.deleteCompanyInfo(
+    companyId,
+    db.connection,
+    function (response) {
+      res.send(response);
+    }
+  );
 });
 
 app.get("/company/:id", function (req, res) {
   const companyId = parseInt(req.params.id);
   console.log(companyId);
-  companyModule.getCompanyInfo(companyId, db, function (response) {
+  companyModule.getCompanyInfo(companyId, db.connection, function (response) {
     res.send(response);
   });
 });
 
 app.get("/company", function (req, res) {
-  companyModule.getAllCompanies(db, function (response) {
+  companyModule.getAllCompanies(db.connection, function (response) {
     res.send(response);
   });
 });

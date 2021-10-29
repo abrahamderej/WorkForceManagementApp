@@ -16,7 +16,7 @@ const mql = window.matchMedia(`(min-width: 800px)`);
 export const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarDocked, setSidebarDocked] = useState(mql.matches);
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.user.userLogin.isLogin);
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
   console.log(isLogin);

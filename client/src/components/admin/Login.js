@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../../assets/images/ninja-logo.jpg";
 import Axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserProfile } from "../../store/actions";
+import { setUserLogin, setUserProfile } from "../../store/actions";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const Login = () => {
   const [usernameErrMsg, setUsernameErrMsg] = useState({});
   const [passwordErrMsg, setPasswordErrMsg] = useState({});
   const [loginErrMsg, setLoginErrMsg] = useState("");
+  const [userProfileId, setUserProfileId] = useState(0);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -54,11 +55,13 @@ const Login = () => {
   const onLogin = ({ username, password }) => {
     Axios.post("http://localhost:3001/login", { username, password }).then(
       (response) => {
-        console.log(response.data.length);
+        console.log(response.data);
         if (response.data.length > 0) {
           const data = response.data[0];
-          console.log(data);
-          dispatch(setUserProfile(data));
+          console.log(data.userProfile_id + "userid");
+          setUserProfileId(data.userProfile_id);
+          getUserProfile(data.userProfile_id);
+          dispatch(setUserLogin(data));
           history.push("/dashboard");
         } else {
           console.log("we are in else");
@@ -66,6 +69,16 @@ const Login = () => {
         }
       }
     );
+  };
+
+  const getUserProfile = (id) => {
+    console.log(id + "inside the get method");
+    Axios.get("http://localhost:3001/users/" + id).then((response) => {
+      console.log(response.data + " in user profile");
+      const data = response.data;
+      dispatch(setUserProfile(data));
+      console.log("dispatched it" + JSON.stringify(data));
+    });
   };
 
   return (

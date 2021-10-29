@@ -7,7 +7,13 @@ import { useSelector } from "react-redux";
 import Accordion from "./accordion";
 
 export default ({ toggleMenu, sideBarOpen }) => {
-  const username = useSelector((state) => state.user.username);
+  const fullName = useSelector((state) => state.user.userProfile.fullName);
+  const email = useSelector((state) => state.user.userProfile.email);
+  const address = useSelector((state) => state.user.userProfile.address);
+  const phoneNumber = useSelector(
+    (state) => state.user.userProfile.phoneNumber
+  );
+  console.log(fullName);
   //let { accountId, workcenterId } = useParams();
   const accountId = 1;
   const workcenterId = 1;
@@ -42,15 +48,15 @@ export default ({ toggleMenu, sideBarOpen }) => {
           />
         </div>
         <div className="card-body">
-          <h4 className="card-title mb-0 pb-0">{username}</h4>
+          <h4 className="card-title mb-0 pb-0">{fullName}</h4>
         </div>
         <div
           className="card-subtitle p-2"
           style={{ marginLeft: -1, marginBottom: -1 }}
         >
-          ePixelation
-          <div className="font-italic">Senior Director</div>
-          <div className="font-italic">john.smith@email.com</div>
+          Address: {address}
+          <div className="font-italic">{phoneNumber}</div>
+          <div className="font-italic">{email}</div>
         </div>
       </div>
 

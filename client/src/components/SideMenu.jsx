@@ -3,6 +3,7 @@ import { matchPath } from "react-router";
 import { useLocation } from "react-router-dom";
 import { NavLink, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import logo from "../assets/images/profile-icon-m.png";
 
 import Accordion from "./accordion";
 
@@ -44,7 +45,7 @@ export default ({ toggleMenu, sideBarOpen }) => {
               border: "4px solid #fff",
               borderRadius: "50%",
             }}
-            src={require("../assets/images/profile-icon.png")}
+            src={logo}
           />
         </div>
         <div className="card-body">
@@ -205,10 +206,19 @@ export default ({ toggleMenu, sideBarOpen }) => {
 
       <h6>Wizards</h6>
       <NavLink className="link" to="/create/account" onClick={toggleMenu}>
-        <i className="fas fa-plus fa-lg mr-3"></i> Create Account
+        <i className="fas fa-plus fa-lg mr-3"></i> Company
       </NavLink>
       <NavLink className="link" to="/create/workcenter" onClick={toggleMenu}>
-        <i className="fas fa-plus fa-lg mr-3"></i> Create Workcenter
+        <i className="fas fa-plus fa-lg mr-3"></i> Client
+      </NavLink>
+      <NavLink className="link" to="/create/workcenter" onClick={toggleMenu}>
+        <i className="fas fa-plus fa-lg mr-3"></i> Project
+      </NavLink>
+      <NavLink className="link" to="/create/workcenter" onClick={toggleMenu}>
+        <i className="fas fa-plus fa-lg mr-3"></i> Policy
+      </NavLink>
+      <NavLink className="link" to="/create/workcenter" onClick={toggleMenu}>
+        <i className="fas fa-plus fa-lg mr-3"></i> Users
       </NavLink>
       <br />
     </div>

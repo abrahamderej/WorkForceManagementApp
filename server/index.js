@@ -56,7 +56,9 @@ app.get("/users/:id", (req, res) => {
 //Company API's
 app.post("/company", function (req, res) {
   var postData = req.body;
+  console.log("Post DAta: " + postData);
   companyModule.postCompanyInfo(postData, db.connection, function (response) {
+    console.log("Response :" + response);
     res.send(response);
   });
 });
@@ -64,6 +66,7 @@ app.post("/company", function (req, res) {
 app.put("/company", function (req, res) {
   var postData = req.body;
   companyModule.updateCompanyInfo(postData, db.connection, function (response) {
+    console.log("Response :" + response.status);
     res.send(response);
   });
 });

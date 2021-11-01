@@ -84,7 +84,7 @@ const Login = () => {
   return (
     <div className="container-login">
       <img alt="logo" className="login-logo" src={logo} />
-      <form className="add-form" onSubmit={onSubmit}>
+      <form className="add-form-login" onSubmit={onSubmit}>
         <div className="form-control-login">
           <label>UserName</label>
           <input

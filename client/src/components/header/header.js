@@ -32,7 +32,7 @@ export default ({ toggleMenu, toggleSearch, sideBarOpen }) => {
       <button className="header-btn">Profile</button>
       <button className="header-btn">Users</button>
 
-      <Modal
+      {/* <Modal
         title="Search procorem..."
         isOpen={isSearchOpen}
         footer={
@@ -94,32 +94,8 @@ export default ({ toggleMenu, toggleSearch, sideBarOpen }) => {
             </label>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
       <ul className="navbar-nav">
-        <li className="nav-item">
-          <span
-            className="nav-link"
-            onClick={() => {
-              setIsSearchOpen(true);
-            }}
-          >
-            <i className="fab fa-searchengin fa-lg"></i>
-          </span>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/profile/messages"
-            className="nav-link"
-            activeClassName="fake"
-          >
-            <i className="fas fa-inbox fa-lg"></i>
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to="/profile" className="nav-link" activeClassName="fake">
-            <i className="fas fa-user-circle fa-lg"></i>
-          </NavLink>
-        </li>
         <li className="nav-item">
           <NavLink to="/login" className="nav-link" activeClassName="fake">
             <i className="fas fa-sign-out-alt fa-lg"></i>

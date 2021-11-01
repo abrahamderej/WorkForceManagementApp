@@ -21,14 +21,21 @@ exports.getAllCompanies = function (connection, mycallbackFunc) {
 };
 
 exports.postCompanyInfo = function (values, connection, mycallbackFunc) {
+  console.log(values + "values");
   var postData = values;
   connection.query(
     "INSERT INTO Company SET ?",
     postData,
     function (error, results, fields) {
-      if (error) throw error;
-      console.log(results);
-      mycallbackFunc(results);
+      if (error) {
+        // console.log(error + "Error");
+        // // console.log(error.data.sqlMessage + "sql error");
+        // throw error;
+        mycallbackFunc("Error");
+      } else {
+        console.log(results);
+        mycallbackFunc(results);
+      }
     }
   );
 };

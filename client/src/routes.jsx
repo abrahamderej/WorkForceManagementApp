@@ -11,6 +11,8 @@ import { Dashboard } from "./components/Dashboard";
 import Company from "./components/company/CompanyProfile";
 import { Layout } from "./components/Layout";
 import { useSelector } from "react-redux";
+import CompanyRegister from "./components/company/CompanyRegister";
+import { CompanyInfo } from "./components/company/CompanyInfo";
 // import Favorites from "./pages/favorites";
 // import Feed from "./pages/feed";
 // import Calendar from "./pages/calendar";
@@ -34,10 +36,21 @@ const NotFound = () => (
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={() => <Login />} />
+    <Route path="/login" component={() => <Login />} />
     <Layout>
       <Route path="/home" component={() => <Home />} />
       <Route path="/dashboard" component={() => <Dashboard />} />
-      <Route path="/company" component={() => <Company />} />
+
+      <Route
+        path="/company"
+        render={({ match: { url } }) => (
+          <>
+            <Route path={`${url}/`} component={Company} exact />
+            <Route path={`${url}/register`} component={CompanyRegister} />
+            <Route path={`${url}/info`} component={CompanyInfo} />
+          </>
+        )}
+      />
     </Layout>
 
     {/* <Route path="/" exact component={Login} /> */}

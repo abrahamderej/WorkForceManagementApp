@@ -12,6 +12,7 @@ import "./assets/styles/main.scss";
 import "./assets/styles/heatmap.css";
 import "./assets/styles/tabs.css";
 import "./assets/styles/login.css";
+import "./assets/styles/company.css";
 import { useSelector } from "react-redux";
 
 function App() {

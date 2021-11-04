@@ -64,6 +64,7 @@ app.post("/company", function (req, res) {
 });
 
 app.put("/company", function (req, res) {
+  console.log(req.body);
   var postData = req.body;
   companyModule.updateCompanyInfo(postData, db.connection, function (response) {
     console.log("Response :" + response.status);
@@ -86,7 +87,7 @@ app.get("/company/:id", function (req, res) {
   const companyId = parseInt(req.params.id);
   console.log(companyId);
   companyModule.getCompanyInfo(companyId, db.connection, function (response) {
-    res.send(response);
+    res.send(JSON.stringify(response));
   });
 });
 

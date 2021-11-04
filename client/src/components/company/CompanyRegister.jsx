@@ -6,6 +6,10 @@ import Axios from "axios";
 import validator from "validator";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLogin, setUserProfile } from "../../store/actions";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import { InputLabel } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
 
 const CompanyRegister = () => {
   const dispatch = useDispatch();
@@ -28,12 +32,23 @@ const CompanyRegister = () => {
 
   const [userProfileId, setUserProfileId] = useState(0);
 
+  const countries = [
+    { value: "Nepal", label: "Nepal" },
+    { value: "USA", label: "USA" },
+    { value: "Peru", label: "Peru" },
+  ];
+
+  const companyTypes = [
+    { value: "Private", label: "Private" },
+    { value: "Pulbic", label: "Public" },
+  ];
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(e);
     const isFormValid = validation();
 
     if (isFormValid) {
-      onLogin({
+      onRegister({
         name,
         email,
         vision,
@@ -55,6 +70,7 @@ const CompanyRegister = () => {
     setVision("");
     setIndustry("");
   };
+
   const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   );
@@ -88,7 +104,7 @@ const CompanyRegister = () => {
     return isValid;
   };
 
-  const onLogin = ({
+  const onRegister = ({
     name,
     email,
     vision,
@@ -180,16 +196,20 @@ const CompanyRegister = () => {
           })} */}
         </div>
         <div className="form-control-company">
-          <label>Country</label>
-          <input
-            type="text"
-            placeholder="Add Country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-          {/* {Object.keys(countryErrMsg).map((key) => {
-            return <div style={{ color: "red" }}>{countryErrMsg[key]}</div>;
-          })} */}
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
+            <InputLabel id="demo-simple-select-standard-label">
+              Country
+            </InputLabel>
+            <Select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              label="----Select Country---"
+            >
+              {countries.map((country) => (
+                <MenuItem value={country.value}>{country.label}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
         <div className="form-control-company">
           <label>Employee Count</label>
@@ -229,17 +249,22 @@ const CompanyRegister = () => {
             return <div style={{ color: "red" }}>{industryErrMsg[key]}</div>;
           })} */}
         </div>
+
         <div className="form-control-company">
-          <label>Type</label>
-          <input
-            type="text"
-            placeholder="Add Company Type"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          />
-          {/* {Object.keys(typeErrMsg).map((key) => {
-            return <div style={{ color: "red" }}>{typeErrMsg[key]}</div>;
-          })} */}
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 150 }}>
+            <InputLabel id="demo-simple-select-standard-label">
+              Company Type
+            </InputLabel>
+            <Select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              label="----Select Company Type---"
+            >
+              {companyTypes.map((type) => (
+                <MenuItem value={type.value}>{type.label}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
 
         <div className="form-control-company">

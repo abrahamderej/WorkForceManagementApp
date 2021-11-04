@@ -13,6 +13,7 @@ import { Layout } from "./components/Layout";
 import { useSelector } from "react-redux";
 import CompanyRegister from "./components/company/CompanyRegister";
 import { CompanyInfo } from "./components/company/CompanyInfo";
+import EditCompany from "./components/company/EditCompany";
 // import Favorites from "./pages/favorites";
 // import Feed from "./pages/feed";
 // import Calendar from "./pages/calendar";
@@ -48,6 +49,7 @@ const Routes = () => (
             <Route path={`${url}/`} component={Company} exact />
             <Route path={`${url}/register`} component={CompanyRegister} />
             <Route path={`${url}/info`} component={CompanyInfo} />
+            <Route path={`${url}/edit/:id`} component={EditCompany} />
           </>
         )}
       />

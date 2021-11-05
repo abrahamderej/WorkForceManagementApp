@@ -1,6 +1,6 @@
 const userReducer = (
   state = {
-    userLogin: { username: "", password: "", isLogin: false },
+    userLogin: { username: "", password: "", isLogin: false, roleName: "" },
     userProfile: {},
   },
   action
@@ -13,6 +13,7 @@ const userReducer = (
           username: action.payload.userName,
           password: action.payload.password,
           isLogin: true,
+          roleName: action.payload.roleName,
         },
       };
     case "SETUSERPROFILE":
@@ -26,7 +27,9 @@ const userReducer = (
             action.payload.street +
             " " +
             action.payload.state +
+            " " +
             action.payload.zipCode +
+            " " +
             action.payload.country,
         },
       };

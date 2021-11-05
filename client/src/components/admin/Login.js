@@ -58,6 +58,7 @@ const Login = () => {
         console.log(response.data);
         if (response.data.length > 0) {
           const data = response.data[0];
+          console.log(data);
           console.log(data.userProfile_id + "userid");
           setUserProfileId(data.userProfile_id);
           getUserProfile(data.userProfile_id);
@@ -76,6 +77,7 @@ const Login = () => {
     Axios.get("http://localhost:3001/users/" + id).then((response) => {
       console.log(response.data + " in user profile");
       const data = response.data;
+      localStorage.setItem("userProfile", JSON.stringify(data));
       dispatch(setUserProfile(data));
       console.log("dispatched it" + JSON.stringify(data));
     });

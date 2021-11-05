@@ -11,6 +11,10 @@ export default ({ toggleMenu, toggleSearch, sideBarOpen }) => {
   const handleCompanyDashboard = () => {
     history.push("/company");
   };
+  const handleProfileDashboard = () => {
+    history.push("/profile");
+  };
+
   const onClickToggle = () => {
     alert("Toggle Clicked");
   };
@@ -29,7 +33,9 @@ export default ({ toggleMenu, toggleSearch, sideBarOpen }) => {
       <button className="header-btn">Client</button>
       <button className="header-btn">Project</button>
       <button className="header-btn">Policy</button>
-      <button className="header-btn">Profile</button>
+      <button className="header-btn" onClick={handleProfileDashboard}>
+        Profile
+      </button>
       <button className="header-btn">Users</button>
 
       {/* <Modal

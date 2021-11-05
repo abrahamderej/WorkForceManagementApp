@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 var companyModule = require("../server/controller/CompanyController");
+var profileModule = require("../server/controller/ProfileController");
 
 //Login
 app.post("/login", (req, res) => {
@@ -51,6 +52,15 @@ app.get("/users/:id", (req, res) => {
       }
     }
   );
+});
+
+app.put("/profile", function (req, res) {
+  console.log(req.body);
+  var postData = req.body;
+  profileModule.updateProfileInfo(postData, db.connection, function (response) {
+    console.log("Response :" + response.status);
+    res.send(response);
+  });
 });
 
 //Company API's

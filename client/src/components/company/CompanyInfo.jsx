@@ -43,7 +43,7 @@ export const CompanyInfo = ({}) => {
                 }
                 action={
                   <Button size="small">
-                    <Link to={"edit/" + c.id}>
+                    <Link to={"edit"}>
                       <i>
                         <EditIcon />
                         Edit

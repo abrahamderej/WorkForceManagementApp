@@ -14,7 +14,7 @@ export default function BasicCard({ title, body, linkText }) {
     history.push("/company/" + url);
   };
   return (
-    <Card sx={{ minWidth: 275, marginRight: 2 }}>
+    <Card sx={{ minWidth: 275, marginRight: 2, marginBottom: 2 }}>
       <CardContent>
         <div className="titleBody">
           <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>

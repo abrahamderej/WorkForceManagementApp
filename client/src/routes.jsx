@@ -8,12 +8,15 @@ import { useHistory } from "react-router-dom";
 // import Login from "./pages/login";
 import Home from "./pages/Home";
 import { Dashboard } from "./components/Dashboard";
-import Company from "./components/company/CompanyProfile";
+import Company from "./components/company";
+import Profile from "./components/profile";
 import { Layout } from "./components/Layout";
 import { useSelector } from "react-redux";
 import CompanyRegister from "./components/company/CompanyRegister";
 import { CompanyInfo } from "./components/company/CompanyInfo";
 import EditCompany from "./components/company/EditCompany";
+import EditProfile from "./components/profile/EditProfile";
+import CompanyList from "./components/company/CompanyList";
 // import Favorites from "./pages/favorites";
 // import Feed from "./pages/feed";
 // import Calendar from "./pages/calendar";
@@ -49,7 +52,18 @@ const Routes = () => (
             <Route path={`${url}/`} component={Company} exact />
             <Route path={`${url}/register`} component={CompanyRegister} />
             <Route path={`${url}/info`} component={CompanyInfo} />
-            <Route path={`${url}/edit/:id`} component={EditCompany} />
+            <Route path={`${url}/edit`} component={EditCompany} />
+            <Route path={`${url}/list`} component={CompanyList} />
+          </>
+        )}
+      />
+
+      <Route
+        path="/profile"
+        render={({ match: { url } }) => (
+          <>
+            <Route path={`${url}/`} component={Profile} exact />
+            <Route path={`${url}/edit`} component={EditProfile} />
           </>
         )}
       />

@@ -27,10 +27,13 @@ app.post("/login", (req, res) => {
           if (result == true) {
             console.log("success" + results[0]);
             res.send(results);
+          } else {
+            console.log("Password is not correct");
+            res.send("Error");
           }
         });
       } else {
-        res.send(results);
+        res.send("Error");
       }
     }
   );

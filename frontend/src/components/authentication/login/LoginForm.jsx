@@ -2,10 +2,11 @@ import React from "react";
 import * as Yup from "yup";
 import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useFormik, Form, FormikProvider } from "formik";
+import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
+import Axios from "axios";
 // material
 import {
   Link,
@@ -15,6 +16,7 @@ import {
   IconButton,
   InputAdornment,
   FormControlLabel,
+  formLabelClasses,
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
@@ -24,24 +26,51 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
+    username: Yup.string().required("Username is required"),
     password: Yup.string().required("Password is required"),
+    login: Yup.string().required("Username & Password should be valid!!"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
       remember: true,
+      login: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      alert("HI");
+    onSubmit: (values, errors) => {
+      onLogin(values, errors);
       //   navigate("/dashboard", { replace: true });
     },
   });
+
+  const onLogin = (values, { setFieldError }) => {
+    alert("Coming in Login" + values.username + " " + values.password);
+    const username = values.username;
+    const password = values.password;
+    Axios.post("http://localhost:3001/login", { username, password }).then(
+      (response) => {
+        console.log(JSON.stringify(response.data));
+        if (response.data !== "Error") {
+          const data = response.data[0];
+          console.log(data);
+          console.log(data.userProfile_id + "userid");
+          formik.setSubmitting(true);
+          // setUserProfileId(data.userProfile_id);
+          // getUserProfile(data.userProfile_id);
+          // dispatch(setUserLogin(data));
+          // history.push("/dashboard");
+        } else {
+          console.log("we are in else");
+          // alert("I am unvalid for now");
+          // setFieldError("username", "Username is invalid ");
+          formik.setSubmitting(false);
+          setFieldError("login", "Please type correct username and password!!");
+        }
+      }
+    );
+  };
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
@@ -57,11 +86,11 @@ const LoginForm = () => {
           <TextField
             fullWidth
             autoComplete="username"
-            type="email"
-            label="Email address"
-            {...getFieldProps("email")}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
+            type="text"
+            label="Username"
+            {...getFieldProps("username")}
+            error={Boolean(touched.username && errors.username)}
+            helperText={touched.username && errors.username}
           />
 
           <TextField
@@ -99,12 +128,11 @@ const LoginForm = () => {
             }
             label="Remember me"
           />
-
           <Link component={RouterLink} variant="subtitle2" to="#">
             Forgot password?
           </Link>
         </Stack>
-
+        <ErrorMessage name="login" component="div" className="error" />
         <LoadingButton
           fullWidth
           size="large"

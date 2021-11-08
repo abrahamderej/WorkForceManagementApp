@@ -22,7 +22,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 
 const LoginForm = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -41,12 +41,10 @@ const LoginForm = () => {
     validationSchema: LoginSchema,
     onSubmit: (values, errors) => {
       onLogin(values, errors);
-      //   navigate("/dashboard", { replace: true });
     },
   });
 
   const onLogin = (values, { setFieldError }) => {
-    alert("Coming in Login" + values.username + " " + values.password);
     const username = values.username;
     const password = values.password;
     Axios.post("http://localhost:3001/login", { username, password }).then(
@@ -56,7 +54,8 @@ const LoginForm = () => {
           const data = response.data[0];
           console.log(data);
           console.log(data.userProfile_id + "userid");
-          formik.setSubmitting(true);
+          navigate("/dashboard/app", { replace: true });
+          alert("DDDDD");
           // setUserProfileId(data.userProfile_id);
           // getUserProfile(data.userProfile_id);
           // dispatch(setUserLogin(data));

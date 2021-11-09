@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useHistory } from "react";
+import { Navigate, useNavigate } from "react-router";
 import Axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -23,7 +24,7 @@ const EditProfile = () => {
   const [country, setCountry] = useState(data.country);
   const id = data.id;
 
-  const history = useHistory();
+  const navigation = useNavigate();
   const dispatch = useDispatch();
 
   const countries = [
@@ -56,7 +57,7 @@ const EditProfile = () => {
         if (response.data.affectedRows > 0) {
           localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
           dispatch(setUserProfile(updatedProfile));
-          history.push("/profile");
+          navigation("/dashboard/profile");
         } else {
           alert("Please Try Again!!");
         }

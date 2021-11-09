@@ -19,10 +19,12 @@ const ProfileIndex = () => {
   const data = JSON.parse(localStorage.getItem("userProfile"));
   const user = useSelector((state) => state.user.userProfile);
   const navigate = useNavigate();
+
   const onEditButton = () => {
     console.log("Edit button Clicked");
-    navigate("edit");
+    navigate("/dashboard/profile/edit", { replace: true });
   };
+
   return (
     <div>
       <Card sx={{ minWidth: 275, marginRight: 2 }}>

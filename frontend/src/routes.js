@@ -3,7 +3,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import DashboardLayout from "./layouts/dashboard";
 import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
 //
-import Sample from "./pages/Sample";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DashboardApp from "./pages/DashboardApp";
@@ -29,11 +29,8 @@ export default function Router() {
         { path: "companies", element: <Blog /> },
         { path: "clients", element: <Blog /> },
         { path: "policies", element: <Blog /> },
-        {
-          path: "profile",
-          element: <Profile />
-        },
-        { path: "edit", element: <EditProfile /> },
+        { path: "profile", element: <Profile /> },
+        { path: "profile/edit", element: <EditProfile /> },
       ],
     },
     {

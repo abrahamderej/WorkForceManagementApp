@@ -1,13 +1,15 @@
-import logo from "./logo.svg";
-import "./App.css";
-import ThemeConfig from "./theme";
+// routes
 import Router from "./routes";
+// theme
+import ThemeConfig from "./theme";
 import GlobalStyles from "./theme/globalStyles";
 // components
 import ScrollToTop from "./components/ScrollToTop";
 import { BaseOptionChartStyle } from "./components/charts/BaseOptionChart";
 
-function App() {
+// ----------------------------------------------------------------------
+
+export default function App() {
   return (
     <ThemeConfig>
       <ScrollToTop />
@@ -17,5 +19,3 @@ function App() {
     </ThemeConfig>
   );
 }
-
-export default App;

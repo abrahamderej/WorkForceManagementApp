@@ -20,10 +20,15 @@ import {
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserLogin, setUserProfile } from "../../../store/actions";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [userProfileId, setUserProfileId] = useState(0);
 
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -54,11 +59,11 @@ const LoginForm = () => {
           const data = response.data[0];
           console.log(data);
           console.log(data.userProfile_id + "userid");
+          setUserProfileId(data.userProfile_id);
+          getUserProfile(data.userProfile_id);
+          dispatch(setUserLogin(data));
           navigate("/dashboard/app", { replace: true });
-          alert("DDDDD");
-          // setUserProfileId(data.userProfile_id);
-          // getUserProfile(data.userProfile_id);
-          // dispatch(setUserLogin(data));
+
           // history.push("/dashboard");
         } else {
           console.log("we are in else");
@@ -69,6 +74,17 @@ const LoginForm = () => {
         }
       }
     );
+  };
+
+  const getUserProfile = (id) => {
+    console.log(id + "inside the get method");
+    Axios.get("http://localhost:3001/users/" + id).then((response) => {
+      console.log(response.data + " in user profile");
+      const data = response.data;
+      localStorage.setItem("userProfile", JSON.stringify(data));
+      dispatch(setUserProfile(data));
+      console.log("dispatched it" + JSON.stringify(data));
+    });
   };
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =

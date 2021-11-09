@@ -1,13 +1,19 @@
 import logo from "./logo.svg";
 import "./App.css";
 import ThemeConfig from "./theme";
-import { LoginForm } from "../src/components/authentication/login";
-import { Login } from "../src/pages/index";
+import Router from "./routes";
+import GlobalStyles from "./theme/globalStyles";
+// components
+import ScrollToTop from "./components/ScrollToTop";
+import { BaseOptionChartStyle } from "./components/charts/BaseOptionChart";
 
 function App() {
   return (
     <ThemeConfig>
-      <Login />
+      <ScrollToTop />
+      <GlobalStyles />
+      <BaseOptionChartStyle />
+      <Router />
     </ThemeConfig>
   );
 }

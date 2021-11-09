@@ -1,7 +1,7 @@
 // material
-import { Box, Grid, Container, Typography } from '@mui/material';
+import { Box, Grid, Container, Typography } from "@mui/material";
 // components
-import Page from '../components/Page';
+import Page from "../components/Page";
 import {
   AppTasks,
   AppNewUsers,
@@ -14,8 +14,8 @@ import {
   AppWebsiteVisits,
   AppTrafficBySite,
   AppCurrentSubject,
-  AppConversionRates
-} from '../components/_dashboard/app';
+  AppConversionRates,
+} from "../components/_dashboard/app";
 
 // ----------------------------------------------------------------------
 

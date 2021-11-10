@@ -11,8 +11,8 @@ import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import User from "./pages/User";
 import NotFound from "./pages/Page404";
-import Profile from "./components/_dashboard/profile";
-import EditProfile from "./components/_dashboard/profile/EditProfile";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 
 // ----------------------------------------------------------------------
 
@@ -38,8 +38,8 @@ export default function Router() {
       element: <LogoOnlyLayout />,
       children: [
         { path: "login", element: <Login /> },
-        // { path: "register", element: <Register /> },
-        // { path: "404", element: <NotFound /> },
+        { path: "register", element: <Register /> },
+        { path: "404", element: <NotFound /> },
         { path: "/", element: <Navigate to="/login" /> },
         { path: "*", element: <Navigate to="/404" /> },
       ],

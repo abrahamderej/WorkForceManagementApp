@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import DashboardApp from "./pages/DashboardApp";
 import Products from "./pages/Products";
 import Blog from "./pages/Blog";
+import Company from "./pages/Company";
 import User from "./pages/User";
 import NotFound from "./pages/Page404";
 import Profile from "./pages/Profile";
@@ -26,7 +27,7 @@ export default function Router() {
         { path: "app", element: <DashboardApp /> },
         { path: "users", element: <User /> },
         { path: "projects", element: <Products /> },
-        { path: "companies", element: <Blog /> },
+        { path: "companies", element: <Company /> },
         { path: "clients", element: <Blog /> },
         { path: "policies", element: <Blog /> },
         { path: "profile", element: <Profile /> },

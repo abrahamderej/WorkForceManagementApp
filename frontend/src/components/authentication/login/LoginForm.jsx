@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import eyeFill from "@iconify/icons-eva/eye-fill";
 import eyeOffFill from "@iconify/icons-eva/eye-off-fill";
 import Axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 // material
 import {
   Link,
@@ -17,6 +18,7 @@ import {
   InputAdornment,
   FormControlLabel,
   formLabelClasses,
+  Button,
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
@@ -29,6 +31,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [userProfileId, setUserProfileId] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
@@ -62,9 +65,11 @@ const LoginForm = () => {
           setUserProfileId(data.userProfile_id);
           getUserProfile(data.userProfile_id);
           dispatch(setUserLogin(data));
-          navigate("/dashboard/app", { replace: true });
+          setIsLoading(true);
 
-          // history.push("/dashboard");
+          window.setTimeout(() => {
+            navigate("/dashboard/app", { replace: true });
+          }, 1500);
         } else {
           console.log("we are in else");
           // alert("I am unvalid for now");
@@ -148,15 +153,17 @@ const LoginForm = () => {
           </Link>
         </Stack>
         <ErrorMessage name="login" component="div" className="error" />
-        <LoadingButton
+        <Button
           fullWidth
           size="large"
           type="submit"
           variant="contained"
           loading={isSubmitting}
+          disabled={isLoading}
         >
           Login
-        </LoadingButton>
+          {isLoading && <CircularProgress />}
+        </Button>
       </Form>
     </FormikProvider>
   );

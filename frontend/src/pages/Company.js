@@ -38,7 +38,7 @@ export default function Company() {
     setButtonType("list");
   };
   return (
-    <Page title="Company| WFM">
+    <Page title="CompanyPage| WFM">
       <Container>
         <Stack
           direction="row"

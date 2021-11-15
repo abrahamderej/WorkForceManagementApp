@@ -31,11 +31,14 @@ import {
 import Page from "../components/Page";
 export default function Company() {
   const [buttonType, setButtonType] = useState("view");
+  const [onboarding, setOnboarding] = useState(false);
   const handleBoarding = () => {
     setButtonType("onboarding");
+    setOnboarding(true);
   };
   const handleList = () => {
     setButtonType("list");
+    setOnboarding(false);
   };
   return (
     <Page title="Company| WFM">
@@ -77,9 +80,15 @@ export default function Company() {
             case "list":
               return <CompanyList />;
             case "onboarding":
-              return <CreateCompany />;
+              return (
+                <CreateCompany
+                  buttonType={buttonType}
+                  setButtonType={setButtonType}
+                  setOnboarding={setOnboarding}
+                />
+              );
             case "view":
-              return <CompanyInfo />;
+              return <CompanyInfo onboarding={onboarding} />;
             default:
               return null;
           }

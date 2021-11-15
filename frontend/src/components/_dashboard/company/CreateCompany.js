@@ -27,7 +27,7 @@ import {
 
 import { LoadingButton } from "@mui/lab";
 
-const CreateCompany = () => {
+const CreateCompany = ({ buttonType, setButtonType, setOnboarding }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const RegisterSchema = Yup.object().shape({
@@ -68,8 +68,9 @@ const CreateCompany = () => {
     Axios.post("http://localhost:3001/company", values).then((response) => {
       console.log(response.data);
       if (response.data.affectedRows > 0) {
-        alert("Company Successfull Registered");
-        const data = response.data;
+        localStorage.setItem("companyOnboarding", JSON.stringify([values]));
+        setButtonType("view");
+        setOnboarding(true);
       } else {
         alert("Error happend");
       }

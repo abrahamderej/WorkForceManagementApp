@@ -1,6 +1,12 @@
 const userReducer = (
   state = {
-    userLogin: { username: "", password: "", isLogin: false, roleName: "" },
+    userLogin: {
+      username: "",
+      password: "",
+      isLogin: false,
+      roleName: "",
+      companyId: 0,
+    },
     userProfile: {},
   },
   action
@@ -14,6 +20,7 @@ const userReducer = (
           password: action.payload.password,
           isLogin: true,
           roleName: action.payload.roleName,
+          companyId: action.payload.companyId,
         },
       };
     case "SETUSERPROFILE":

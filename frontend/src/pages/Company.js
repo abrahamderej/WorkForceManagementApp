@@ -41,7 +41,7 @@ export default function Company() {
     setOnboarding(false);
   };
   return (
-    <Page title="Company| WFM">
+    <Page title="CompanyPage| WFM">
       <Container>
         <Stack
           direction="row"

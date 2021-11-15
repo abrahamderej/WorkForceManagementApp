@@ -11,6 +11,7 @@ import { BaseOptionChartStyle } from "./components/charts/BaseOptionChart";
 
 export default function App() {
   return (
+    
     <ThemeConfig>
       <ScrollToTop />
       <GlobalStyles />

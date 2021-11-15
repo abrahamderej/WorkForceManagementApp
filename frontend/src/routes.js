@@ -14,6 +14,7 @@ import User from "./pages/User";
 import NotFound from "./pages/Page404";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import Demo from "./pages/Demo"
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,7 @@ export default function Router() {
         { path: "policies", element: <Blog /> },
         { path: "profile", element: <Profile /> },
         { path: "profile/edit", element: <EditProfile /> },
+        { path: "demo", element: <Demo /> },
       ],
     },
     {

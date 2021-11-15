@@ -1,9 +1,10 @@
 import { filter } from "lodash";
 import { Icon } from "@iconify/react";
 import { sentenceCase } from "change-case";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import plusFill from "@iconify/icons-eva/plus-fill";
 import listFill from "@iconify/icons-eva/list-fill";
+import eyeFill from '@iconify/icons-eva/eye-fill';
 import { Link as RouterLink } from "react-router-dom";
 import {
   CompanyList,
@@ -30,8 +31,10 @@ import {
 // components
 import Page from "../components/Page";
 export default function Company() {
+ 
   const [buttonType, setButtonType] = useState("view");
   const [onboarding, setOnboarding] = useState(false);
+
   const handleBoarding = () => {
     setButtonType("onboarding");
     setOnboarding(true);
@@ -40,6 +43,14 @@ export default function Company() {
     setButtonType("list");
     setOnboarding(false);
   };
+
+  const handleView = () => {
+    setButtonType("view");
+    setOnboarding(false);
+  }
+ 
+ 
+
   return (
     <Page title="CompanyPage| WFM">
       <Container>
@@ -67,6 +78,13 @@ export default function Company() {
               Onboarding
             </Button>
             <Button
+              onClick={handleView}
+              variant="contained"
+              startIcon={<Icon icon={eyeFill} />}
+            >
+              View
+            </Button>
+            <Button
               variant="contained"
               onClick={handleList}
               startIcon={<Icon icon={listFill} />}
@@ -90,10 +108,9 @@ export default function Company() {
             case "view":
               return <CompanyInfo onboarding={onboarding} />;
             default:
-              return null;
+              return <CompanyInfo onboarding={true} />;
           }
         })()}
-        {/* {buttonType === "list" ? <CompanyList /> : <CreateCompany />} */}
       </Container>
     </Page>
   );

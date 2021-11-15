@@ -92,6 +92,8 @@ export default function CompanyList() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [companies, setCompanies] = useState([]);
 
+
+
   useEffect(() => {
     getCompanyList();
   }, []);
@@ -113,18 +115,21 @@ export default function CompanyList() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = companies.map((n) => n.name);
+      const newSelecteds = companies.map((n) => n.id);
       setSelected(newSelecteds);
+      console.log(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, id) => {
+    console.log(selected + " selected values")
+
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -136,6 +141,8 @@ export default function CompanyList() {
       );
     }
     setSelected(newSelected);
+    console.log(selected + " selected values")
+
   };
 
   const handleChangePage = (event, newPage) => {
@@ -148,19 +155,43 @@ export default function CompanyList() {
   };
 
   const handleFilterByName = (event) => {
+    console.log(event.target.value)
     setFilterName(event.target.value);
   };
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
-  const filteredUsers = applySortFilter(
-    USERLIST,
+  const filteredCompanies = applySortFilter(
+    companies,
     getComparator(order, orderBy),
     filterName
   );
 
-  const isUserNotFound = filteredUsers.length === 0;
+  const isUserNotFound = filteredCompanies.length === 0;
+
+  const handleDeleteFunc = () =>{
+    alert("Are You Sure Want To Delete")
+    selected.map((key, index) => { Axios.delete("http://localhost:3001/company/" + key).then((response) => {
+      const data = response.data;
+      console.log(data);
+      alert("Company Deleted");
+    });
+    console.log("Failed to delete")});
+  
+  }
+
+
+  const handleDelete = (e, id) => {
+    alert("Are You Sure Want To Delete" );
+    Axios.delete("http://localhost:3001/company/" + id).then((response) => {
+      const data = response.data;
+      getCompanyList();
+      console.log(data);
+    });
+    console.log("Failed to delete")
+
+  }
 
   return (
     <Card>
@@ -168,6 +199,7 @@ export default function CompanyList() {
         numSelected={selected.length}
         filterName={filterName}
         onFilterName={handleFilterByName}
+        handleDelete = {handleDeleteFunc}
       />
 
       <Scrollbar>
@@ -183,12 +215,12 @@ export default function CompanyList() {
               onSelectAllClick={handleSelectAllClick}
             />
             <TableBody>
-              {companies
+              {filteredCompanies
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   const { id, name, email, phoneNumber, address, industry } =
                     row;
-                  const isItemSelected = selected.indexOf(name) !== -1;
+                  const isItemSelected = selected.indexOf(id) !== -1;
 
                   return (
                     <TableRow
@@ -202,7 +234,7 @@ export default function CompanyList() {
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          onChange={(event) => handleClick(event, name)}
+                          onChange={(event) => handleClick(event, id)}
                         />
                       </TableCell>
                       <TableCell component="th" scope="row" padding="none">
@@ -218,25 +250,19 @@ export default function CompanyList() {
                       <TableCell align="left">{address}</TableCell>
                       <TableCell align="left">
                         {industry}
-                        {/* <Label
-                          variant="ghost"
-                          color={(status === "banned" && "error") || "success"}
-                        >
-                          {sentenceCase(status)}
-                        </Label> */}
                       </TableCell>
 
                       <TableCell align="right">
-                        <UserMoreMenu />
+                        <UserMoreMenu handleDelete={(e)=>{ handleDelete(e, id)}}  />
                       </TableCell>
                     </TableRow>
                   );
                 })}
-              {/* {emptyRows > 0 && (
+              {emptyRows > 0 && (
                 <TableRow style={{ height: 1 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )} */}
+              )}
             </TableBody>
             {isUserNotFound && (
               <TableBody>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useHistory } from "react";
+import { useLocation } from "react-router";
 import { Navigate, useNavigate } from "react-router";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -27,7 +28,24 @@ import {
 
 import { LoadingButton } from "@mui/lab";
 
-const CreateCompany = ({ buttonType, setButtonType, setOnboarding }) => {
+const EditCompany = (props) => {
+  const { state } = useLocation();
+  const companyId = state.companyId;
+  const companies = localStorage.getItem("companies");
+  const [company, setCompany] = useState({});
+  console.log(companies + "Companies");
+
+  useEffect(() => {
+    if (companies.length > 0) {
+      {
+        Object.keys(companies)
+          .filter((c) => c.id === companyId)
+          .map((c) => setCompany(c));
+      }
+    }
+  }, []);
+  console.log(JSON.stringify(company) + "After useEffect");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const RegisterSchema = Yup.object().shape({
@@ -43,6 +61,8 @@ const CreateCompany = ({ buttonType, setButtonType, setOnboarding }) => {
     country: Yup.string().required("Country is Required!!"),
     type: Yup.string().required("Type is required!!"),
   });
+
+  const data = JSON.parse(localStorage.getItem("userProfile"));
 
   const formik = useFormik({
     initialValues: {
@@ -67,8 +87,8 @@ const CreateCompany = ({ buttonType, setButtonType, setOnboarding }) => {
       console.log(response.data);
       if (response.data.affectedRows > 0) {
         localStorage.setItem("companyOnboarding", JSON.stringify([values]));
-        setButtonType("view");
-        setOnboarding(true);
+        // setButtonType("view");
+        // setOnboarding(true);
       } else {
         alert("Error happend");
       }
@@ -195,4 +215,4 @@ const CreateCompany = ({ buttonType, setButtonType, setOnboarding }) => {
   );
 };
 
-export default CreateCompany;
+export default EditCompany;

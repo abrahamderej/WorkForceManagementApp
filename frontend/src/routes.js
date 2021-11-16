@@ -14,7 +14,8 @@ import User from "./pages/User";
 import NotFound from "./pages/Page404";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import Demo from "./pages/Demo"
+import Demo from "./pages/Demo";
+import { EditCompany } from "./components/_dashboard/company";
 
 // ----------------------------------------------------------------------
 
@@ -24,11 +25,12 @@ export default function Router() {
       path: "/dashboard",
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" replace /> },
+        { element: <Navigate to='/dashboard/app' replace /> },
         { path: "app", element: <DashboardApp /> },
         { path: "users", element: <User /> },
         { path: "projects", element: <Products /> },
         { path: "companies", element: <Company /> },
+        { path: "companies/edit", element: <EditCompany /> },
         { path: "clients", element: <Blog /> },
         { path: "policies", element: <Blog /> },
         { path: "profile", element: <Profile /> },
@@ -43,10 +45,10 @@ export default function Router() {
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
         { path: "404", element: <NotFound /> },
-        { path: "/", element: <Navigate to="/login" /> },
-        { path: "*", element: <Navigate to="/404" /> },
+        { path: "/", element: <Navigate to='/login' /> },
+        { path: "*", element: <Navigate to='/404' /> },
       ],
     },
-    { path: "*", element: <Navigate to="/404" replace /> },
+    { path: "*", element: <Navigate to='/404' replace /> },
   ]);
 }

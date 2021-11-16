@@ -43,7 +43,6 @@ const CompanyInfo = ({ onboarding }) => {
   useEffect(() => {
     console.log("Onboarding" + onboarding);
     if (onboarding) {
-      alert("Onboarding data: \n");
       setCompany(...onboardingData[0]);
       console.log(company + "Company");
     } else {

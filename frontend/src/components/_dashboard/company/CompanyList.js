@@ -8,6 +8,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { useEffect } from "react";
 import Axios from "axios";
 import companyLogo from "./logo.png";
+import MenuPopover from "../../MenuPopover";
+import { useNavigate } from "react-router";
 
 // material
 import {
@@ -91,12 +93,16 @@ export default function CompanyList() {
   const [filterName, setFilterName] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [companies, setCompanies] = useState([]);
+  const [isToolBarOpen, setIsToolBarOpen] = useState(false);
 
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCompanyList();
-  }, []);
+    if (selected.length > 0) {
+      setIsToolBarOpen(true);
+    }
+  }, [isToolBarOpen]);
 
   const getCompanyList = () => {
     Axios.get("http://localhost:3001/company").then((response) => {
@@ -124,7 +130,7 @@ export default function CompanyList() {
   };
 
   const handleClick = (event, id) => {
-    console.log(selected + " selected values")
+    console.log(selected + " selected values");
 
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
@@ -141,8 +147,7 @@ export default function CompanyList() {
       );
     }
     setSelected(newSelected);
-    console.log(selected + " selected values")
-
+    console.log(selected + " selected values");
   };
 
   const handleChangePage = (event, newPage) => {
@@ -155,7 +160,7 @@ export default function CompanyList() {
   };
 
   const handleFilterByName = (event) => {
-    console.log(event.target.value)
+    console.log(event.target.value);
     setFilterName(event.target.value);
   };
 
@@ -170,36 +175,49 @@ export default function CompanyList() {
 
   const isUserNotFound = filteredCompanies.length === 0;
 
-  const handleDeleteFunc = () =>{
-    alert("Are You Sure Want To Delete")
-    selected.map((key, index) => { Axios.delete("http://localhost:3001/company/" + key).then((response) => {
-      const data = response.data;
-      console.log(data);
-      alert("Company Deleted");
+  const handleDeleteFunc = () => {
+    selected.map((key, index) => {
+      Axios.delete("http://localhost:3001/company/" + key).then((response) => {
+        getCompanyList();
+      });
+      setSelected([]);
+      setIsToolBarOpen(false);
+      console.log("Failed to delete");
     });
-    console.log("Failed to delete")});
-  
-  }
-
+  };
 
   const handleDelete = (e, id) => {
-    alert("Are You Sure Want To Delete" );
     Axios.delete("http://localhost:3001/company/" + id).then((response) => {
       const data = response.data;
       getCompanyList();
       console.log(data);
     });
-    console.log("Failed to delete")
+    console.log("Failed to delete");
+  };
 
-  }
+  const handleEdit = (e, id) => {
+    console.log("In edit id of company: " + id);
+    navigate("/dashboard/companies/edit", {
+      state: {
+        companyId: id,
+      },
+    });
+    // Axios.put("http://localhost:3001/company/" + id).then((response) => {
+    //   const data = response.data;
+    //   getCompanyList();
+    //   console.log(data);
+    // });
+    // console.log("Failed to delete")
+  };
 
   return (
     <Card>
       <UserListToolbar
+        isToolBarOpen={isToolBarOpen}
         numSelected={selected.length}
         filterName={filterName}
         onFilterName={handleFilterByName}
-        handleDelete = {handleDeleteFunc}
+        handleDelete={handleDeleteFunc}
       />
 
       <Scrollbar>
@@ -227,33 +245,38 @@ export default function CompanyList() {
                       hover
                       key={id}
                       tabIndex={-1}
-                      role="checkbox"
+                      role='checkbox'
                       selected={isItemSelected}
                       aria-checked={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding='checkbox'>
                         <Checkbox
                           checked={isItemSelected}
                           onChange={(event) => handleClick(event, id)}
                         />
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
-                        <Stack direction="row" alignItems="center" spacing={2}>
+                      <TableCell component='th' scope='row' padding='none'>
+                        <Stack direction='row' alignItems='center' spacing={2}>
                           <Avatar alt={name} src={companyLogo} />
-                          <Typography variant="subtitle2" noWrap>
+                          <Typography variant='subtitle2' noWrap>
                             {name}
                           </Typography>
                         </Stack>
                       </TableCell>
-                      <TableCell align="left">{email}</TableCell>
-                      <TableCell align="left">{phoneNumber}</TableCell>
-                      <TableCell align="left">{address}</TableCell>
-                      <TableCell align="left">
-                        {industry}
-                      </TableCell>
+                      <TableCell align='left'>{email}</TableCell>
+                      <TableCell align='left'>{phoneNumber}</TableCell>
+                      <TableCell align='left'>{address}</TableCell>
+                      <TableCell align='left'>{industry}</TableCell>
 
-                      <TableCell align="right">
-                        <UserMoreMenu handleDelete={(e)=>{ handleDelete(e, id)}}  />
+                      <TableCell align='right'>
+                        <UserMoreMenu
+                          handleEdit={(e) => {
+                            handleEdit(e, id);
+                          }}
+                          handleDelete={(e) => {
+                            handleDelete(e, id);
+                          }}
+                        />
                       </TableCell>
                     </TableRow>
                   );
@@ -267,7 +290,7 @@ export default function CompanyList() {
             {isUserNotFound && (
               <TableBody>
                 <TableRow>
-                  <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                  <TableCell align='center' colSpan={6} sx={{ py: 3 }}>
                     <SearchNotFound searchQuery={filterName} />
                   </TableCell>
                 </TableRow>
@@ -279,7 +302,7 @@ export default function CompanyList() {
 
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
-        component="div"
+        component='div'
         count={companies.length}
         rowsPerPage={rowsPerPage}
         page={page}

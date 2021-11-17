@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useHistory } from "react";
+import { useState, useEffect, useHistory, useLayoutEffect } from "react";
 import { useLocation } from "react-router";
 import { Navigate, useNavigate } from "react-router";
 import MenuItem from "@mui/material/MenuItem";
@@ -27,24 +27,20 @@ import {
 } from "@mui/material";
 
 import { LoadingButton } from "@mui/lab";
+import { jsx } from "@emotion/react";
 
-const EditCompany = (props) => {
+const EditCompany = ({ props }) => {
   const { state } = useLocation();
   const companyId = state.companyId;
-  const companies = localStorage.getItem("companies");
   const [company, setCompany] = useState({});
-  console.log(companies + "Companies");
+  const companyData = JSON.parse(localStorage.getItem("company"));
+  console.log(companyData);
 
+  const [c, setC] = useState([]);
   useEffect(() => {
-    if (companies.length > 0) {
-      {
-        Object.keys(companies)
-          .filter((c) => c.id === companyId)
-          .map((c) => setCompany(c));
-      }
-    }
+    setC(companyData.name);
+    console.log("Company inside use EfFECT" + c);
   }, []);
-  console.log(JSON.stringify(company) + "After useEffect");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,32 +57,33 @@ const EditCompany = (props) => {
     country: Yup.string().required("Country is Required!!"),
     type: Yup.string().required("Type is required!!"),
   });
-
-  const data = JSON.parse(localStorage.getItem("userProfile"));
-
+  console.log(companyData.name + "name");
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      vision: "",
-      address: "",
-      country: "",
-      employeeCount: 0,
-      phoneNumber: "",
-      industry: "",
-      type: "",
+      id: companyData.id,
+      name: companyData.name,
+      email: companyData.email,
+      vision: companyData.vision,
+      address: companyData.address,
+      country: companyData.country,
+      employeeCount: companyData.employeeCount,
+      phoneNumber: companyData.phoneNumber,
+      industry: companyData.industry,
+      type: companyData.type,
     },
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
-      onRegister(values);
+      onUpdate(values);
     },
   });
 
-  const onRegister = (values) => {
-    Axios.post("http://localhost:3001/company", values).then((response) => {
-      console.log(response.data);
+  const onUpdate = (values) => {
+    Axios.put("http://localhost:3001/company", values).then((response) => {
       if (response.data.affectedRows > 0) {
-        localStorage.setItem("companyOnboarding", JSON.stringify([values]));
+        localStorage.setItem("company", JSON.stringify(values));
+        getCompanyList();
+        navigate("/dashboard/companies");
+
         // setButtonType("view");
         // setOnboarding(true);
       } else {
@@ -94,6 +91,14 @@ const EditCompany = (props) => {
       }
     });
   };
+  const getCompanyList = () => {
+    Axios.get("http://localhost:3001/company").then((response) => {
+      const data = response.data;
+
+      localStorage.setItem("companies", JSON.stringify(data));
+    });
+  };
+
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
 
@@ -193,11 +198,7 @@ const EditCompany = (props) => {
               error={Boolean(touched.type && errors.type)}
               helperText={touched.type && errors.type}
             />
-            <TextField
-              fullWidth
-              type='file'
-              // {...getFieldProps("country")}
-            />
+            <TextField fullWidth type='file' />
           </Stack>
           <LoadingButton
             fullWidth
@@ -206,7 +207,7 @@ const EditCompany = (props) => {
             variant='contained'
             loading={isSubmitting}
           >
-            Register
+            Update
           </LoadingButton>
         </Stack>
         <ErrorMessage name='login' component='div' className='error' />

@@ -33,9 +33,9 @@ const CompanyList = () => {
           <List
             sx={{ width: "100%", maxWidth: "60%", bgcolor: "background.paper" }}
           >
-            <ListItem alignItems="flex-start">
+            <ListItem alignItems='flex-start'>
               <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
               </ListItemAvatar>
               <ListItemText
                 primary={company.name}
@@ -43,17 +43,17 @@ const CompanyList = () => {
                   <React.Fragment>
                     <Typography
                       // sx={{ display: "inline" }}
-                      component="div"
-                      variant="body2"
-                      color="text.primary"
+                      component='div'
+                      variant='body2'
+                      color='text.primary'
                     >
                       VISION: {company.vision}
                     </Typography>
                     <Typography
                       // sx={{ display: "inline" }}
-                      component="div"
-                      variant="body2"
-                      color="text.primary"
+                      component='div'
+                      variant='body2'
+                      color='text.primary'
                     >
                       ADDRESS: {company.address}
                     </Typography>
@@ -61,7 +61,7 @@ const CompanyList = () => {
                 }
               />
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider variant='inset' component='li' />
           </List>
         );
       })}

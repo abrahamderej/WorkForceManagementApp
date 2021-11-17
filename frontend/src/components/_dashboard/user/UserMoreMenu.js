@@ -24,7 +24,7 @@ import DeletePopOver from "../../DeletePopOver";
 
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu({ handleDelete, handleEdit, keyId }) {
+export default function UserMoreMenu({ handleDelete, handleEdit, keyid }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -54,7 +54,7 @@ export default function UserMoreMenu({ handleDelete, handleEdit, keyId }) {
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <MenuItem sx={{ color: "text.secondary" }}>
-          <ListItemButton ref={anchorRef} onClick={handleOpen} keyId={keyId}>
+          <ListItemButton ref={anchorRef} onClick={handleOpen} keyid={keyid}>
             <ListItemIcon>
               <Icon icon={trash2Outline} width={24} height={24} />
             </ListItemIcon>

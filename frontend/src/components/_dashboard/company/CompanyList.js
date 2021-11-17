@@ -94,6 +94,7 @@ export default function CompanyList() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [companies, setCompanies] = useState([]);
   const [isToolBarOpen, setIsToolBarOpen] = useState(false);
+  const companiesData = JSON.parse(localStorage.getItem("companies"));
 
   const navigate = useNavigate();
 
@@ -197,11 +198,20 @@ export default function CompanyList() {
 
   const handleEdit = (e, id) => {
     console.log("In edit id of company: " + id);
+    if (companies.length > 0) {
+      {
+        let curCompany = companiesData.filter((c) => c.id == id);
+        console.log(JSON.stringify(curCompany) + "inside let ");
+        //setCompany(curCompany[0]);
+        localStorage.setItem("company", JSON.stringify(curCompany[0]));
+      }
+    }
     navigate("/dashboard/companies/edit", {
       state: {
         companyId: id,
       },
     });
+
     // Axios.put("http://localhost:3001/company/" + id).then((response) => {
     //   const data = response.data;
     //   getCompanyList();
@@ -243,7 +253,7 @@ export default function CompanyList() {
                   return (
                     <TableRow
                       hover
-                      key={id}
+                      keyid={id}
                       tabIndex={-1}
                       role='checkbox'
                       selected={isItemSelected}

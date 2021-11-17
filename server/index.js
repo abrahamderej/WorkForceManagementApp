@@ -96,7 +96,6 @@ app.delete("/company/:id", function (req, res) {
   );
 });
 
-
 app.get("/company/:id", function (req, res) {
   const companyId = parseInt(req.params.id);
   console.log(companyId);

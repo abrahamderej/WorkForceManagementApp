@@ -74,4 +74,3 @@ exports.deleteCompanyInfo = function (id, connection, mycallbackFunc) {
     }
   );
 };
-

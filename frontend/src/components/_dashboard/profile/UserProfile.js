@@ -13,6 +13,7 @@ import Axios from "axios";
 import { useState, useEffect, useHistory } from "react";
 import { useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
+import { styled } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
@@ -25,12 +26,26 @@ const UserProfile = () => {
     navigate("/dashboard/profile/edit", { replace: true });
   };
 
+  const TitleTypography = styled(Typography)({
+    marginRight: "50px",
+    flex: "50%",
+    fontWeight: 100,
+    fontSize: "1.2rem",
+  });
+
+  const ValueTypoGraphy = styled(Typography)({
+    //   marginLeft: "10%",
+    flex: "50%",
+    color: "black",
+    fontSize: "1.2rem",
+  });
+
   return (
     <div>
       <Card sx={{ marginRight: 2, marginBottom: 5, maxWidth: "100%" }}>
         <CardContent>
-          <Typography variant="h5" m>
-            Basic Info
+          <Typography variant='h5' m>
+            Basic User Info
           </Typography>
           <hr style={{ color: "gray", opacity: 0.3 }} />
           <Typography
@@ -41,20 +56,18 @@ const UserProfile = () => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
-            <p style={{ marginRight: "50px", flex: "50%" }}>NAME:</p>
-            <p style={{ marginLeft: "40px", flex: "50%", color: "blue" }}>
-              {user.fullName + " "}
-            </p>
-            <hr style={{ color: "gray", opacity: 0.2 }} />
+            <TitleTypography>NAME</TitleTypography>
+            <ValueTypoGraphy>{user.fullName}</ValueTypoGraphy>
+            <hr style={{ marginRight: 10, color: "gray", opacity: 0.2 }} />
           </Typography>
         </CardContent>
       </Card>
       <Card sx={{ minWidth: 450, marginRight: 2 }}>
         <CardContent>
-          <Typography variant="h5" m>
-            Contact Info
+          <Typography variant='h5' m>
+            Contact Information
           </Typography>
           <hr style={{ color: "gray", opacity: 0.3 }} />
           <Typography
@@ -65,13 +78,11 @@ const UserProfile = () => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
-            <p style={{ marginRight: "50px", flex: "50%" }}>EMAIL:</p>
-            <p style={{ marginLeft: "40px", flex: "50%", color: "blue" }}>
-              {user.email + " "}
-            </p>
-            <hr style={{ color: "gray", opacity: 0.2 }} />
+            <TitleTypography>EMAIL</TitleTypography>
+            <ValueTypoGraphy>{user.email}</ValueTypoGraphy>
+            <hr style={{ marginRight: 10, color: "gray", opacity: 0.2 }} />
           </Typography>
           <Typography
             sx={{
@@ -81,13 +92,11 @@ const UserProfile = () => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
-            <p style={{ marginRight: "50px", flex: "50%" }}>ADDRESS:</p>
-            <p style={{ marginLeft: "40px", flex: "50%", color: "blue" }}>
-              {user.address + " "}
-            </p>
-            <hr style={{ color: "gray", opacity: 0.2 }} />
+            <TitleTypography>ADDRESS</TitleTypography>
+            <ValueTypoGraphy>{user.address}</ValueTypoGraphy>
+            <hr style={{ marginRight: 10, color: "gray", opacity: 0.2 }} />
           </Typography>
           <Typography
             sx={{
@@ -97,13 +106,11 @@ const UserProfile = () => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
-            <p style={{ marginRight: "50px", flex: "50%" }}>PHONE NUMBER:</p>
-            <p style={{ marginLeft: "40px", color: "blue", flex: "50%" }}>
-              {user.phoneNumber + " "}
-            </p>
-            <hr style={{ color: "gray", opacity: 0.3 }} />
+            <TitleTypography>PHONE NUMBER</TitleTypography>
+            <ValueTypoGraphy>{user.phoneNumber}</ValueTypoGraphy>
+            <hr style={{ marginRight: 10, color: "gray", opacity: 0.2 }} />
           </Typography>
         </CardContent>
         <CardActions></CardActions>

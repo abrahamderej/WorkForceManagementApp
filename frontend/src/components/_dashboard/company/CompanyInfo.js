@@ -28,7 +28,7 @@ const TitleTypography = styled(Typography)({
 const ValueTypoGraphy = styled(Typography)({
   //   marginLeft: "10%",
   flex: "50%",
-  color: "#231515",
+  color: "black",
   fontSize: "1.2rem",
 });
 
@@ -67,7 +67,7 @@ const CompanyInfo = ({ onboarding }) => {
     <div>
       <Card sx={{ marginRight: 2, marginBottom: 5, maxWidth: "100%" }}>
         <CardContent>
-          <Typography variant="h5" m>
+          <Typography variant='h5' m>
             Basic Company Info
           </Typography>
           <hr style={{ color: "gray", opacity: 0.3 }} />
@@ -79,7 +79,7 @@ const CompanyInfo = ({ onboarding }) => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
             <TitleTypography>NAME</TitleTypography>
             <ValueTypoGraphy>{company.name}</ValueTypoGraphy>
@@ -92,7 +92,7 @@ const CompanyInfo = ({ onboarding }) => {
       </Card>
       <Card sx={{ marginRight: 2, marginBottom: 5, maxWidth: "100%" }}>
         <CardContent>
-          <Typography variant="h5" m>
+          <Typography variant='h5' m>
             Company Description
           </Typography>
           <hr style={{ color: "gray", opacity: 0.3 }} />
@@ -104,7 +104,7 @@ const CompanyInfo = ({ onboarding }) => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
             <TitleTypography>INDUSTRY</TitleTypography>
             <ValueTypoGraphy>{company.industry}</ValueTypoGraphy>
@@ -117,7 +117,7 @@ const CompanyInfo = ({ onboarding }) => {
       </Card>
       <Card sx={{ minWidth: 450, marginRight: 2 }}>
         <CardContent>
-          <Typography variant="h5" m>
+          <Typography variant='h5' m>
             Contact Info
           </Typography>
           <hr style={{ color: "gray", opacity: 0.3 }} />
@@ -129,7 +129,7 @@ const CompanyInfo = ({ onboarding }) => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
             <TitleTypography>EMAIL:</TitleTypography>
             <ValueTypoGraphy>{company.email}</ValueTypoGraphy>
@@ -143,7 +143,7 @@ const CompanyInfo = ({ onboarding }) => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
             <TitleTypography>ADDRESS</TitleTypography>
             <ValueTypoGraphy>{company.address}</ValueTypoGraphy>
@@ -159,7 +159,7 @@ const CompanyInfo = ({ onboarding }) => {
               display: "flex",
               justifyContent: "space-between",
             }}
-            component="div"
+            component='div'
           >
             <TitleTypography>PHONE NUMBER</TitleTypography>
             <ValueTypoGraphy>{company.phoneNumber}</ValueTypoGraphy>

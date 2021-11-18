@@ -10,7 +10,7 @@ import Project from "./pages/Project";
 import Client from "./pages/Client";
 import Policy from "./pages/Policy";
 import Company from "./pages/Company";
-import Employee from "./pages/Employee";
+import User from "./pages/User";
 import NotFound from "./pages/Page404";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
@@ -26,7 +26,7 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/app" replace /> },
         { path: "app", element: <DashboardApp /> },
-        { path: "employees", element: <Employee /> },
+        { path: "users", element: <User /> },
         { path: "projects", element: <Project /> },
         { path: "companies", element: <Company /> },
         { path: "companies/edit", element: <EditCompany /> },

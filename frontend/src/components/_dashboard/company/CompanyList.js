@@ -36,7 +36,7 @@ import {
   UserListHead,
   UserListToolbar,
   UserMoreMenu,
-} from "../../../components/_dashboard/employee";
+} from "../../../components/_dashboard/user";
 //
 import USERLIST from "../../../_mocks_/user";
 
@@ -103,7 +103,7 @@ export default function CompanyList() {
     if (selected.length > 0) {
       setIsToolBarOpen(true);
     }
-  }, [isToolBarOpen]);
+  }, [selected]);
 
   const getCompanyList = () => {
     Axios.get("http://localhost:3001/company").then((response) => {

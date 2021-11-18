@@ -5,17 +5,8 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Grid, Button, Container, Stack, Typography } from "@mui/material";
 // components
 import Page from "../components/Page";
-import {
-  BlogPostCard,
-  BlogPostsSort,
-  BlogPostsSearch,
-} from "../components/_dashboard/blog";
-import { useEffect, useState } from "react";
-//
-import POSTS from "../_mocks_/blog";
-// import EditProfile from "../components/_dashboard/profile/EditProfile";
+
 import { UserProfile } from "../components/_dashboard/profile";
-import { useLocation } from "react-router-dom";
 
 // ----------------------------------------------------------------------
 

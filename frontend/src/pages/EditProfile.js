@@ -5,12 +5,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { Grid, Button, Container, Stack, Typography } from "@mui/material";
 // components
 import Page from "../components/Page";
-import {
-  BlogPostCard,
-  BlogPostsSort,
-  BlogPostsSearch,
-} from "../components/_dashboard/blog";
-//
+
 import POSTS from "../_mocks_/blog";
 // import EditProfile from "../components/_dashboard/profile/EditProfile";
 import { EditUserProfile } from "../components/_dashboard/profile";

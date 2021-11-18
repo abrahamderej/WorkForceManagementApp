@@ -38,8 +38,8 @@ const sidebarConfig = [
     icon: getIcon(fileTextFill),
   },
   {
-    title: "user",
-    path: "/dashboard/users",
+    title: "employee",
+    path: "/dashboard/employees",
     icon: getIcon(peopleFill),
   },
   {

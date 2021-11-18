@@ -76,16 +76,16 @@ export default function UserListToolbar({
       }}
     >
       {numSelected > 0 ? (
-        <Typography component='div' variant='subtitle1'>
+        <Typography component="div" variant="subtitle1">
           {numSelected} selected
         </Typography>
       ) : (
         <SearchStyle
           value={filterName}
           onChange={onFilterName}
-          placeholder='Search user...'
+          placeholder="Search user..."
           startAdornment={
-            <InputAdornment position='start'>
+            <InputAdornment position="start">
               <Box
                 component={Icon}
                 icon={searchFill}
@@ -97,13 +97,13 @@ export default function UserListToolbar({
       )}
 
       {numSelected > 0 ? (
-        <Tooltip open={open} title='Delete'>
+        <Tooltip open={open} title="Delete">
           <IconButton ref={anchorRef} onClick={handleOpen}>
             <Icon icon={trash2Fill} />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title='Filter list'>
+        <Tooltip title="Filter list">
           <IconButton>
             <Icon icon={roundFilterList} />
           </IconButton>

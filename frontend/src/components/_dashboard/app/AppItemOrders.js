@@ -44,7 +44,7 @@ export default function AppItemOrders() {
       </IconWrapperStyle>
       <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Item Orders
+        Employees
       </Typography>
     </RootStyle>
   );

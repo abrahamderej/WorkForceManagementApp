@@ -29,7 +29,7 @@ import {
   UserListHead,
   UserListToolbar,
   UserMoreMenu,
-} from "../components/_dashboard/user";
+} from "../components/_dashboard/employee";
 //
 import USERLIST from "../_mocks_/user";
 

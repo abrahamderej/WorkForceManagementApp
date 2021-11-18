@@ -5,16 +5,15 @@ import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
 //
 
 import Login from "./pages/Login";
-import Register from "./pages/Register";
 import DashboardApp from "./pages/DashboardApp";
-import Products from "./pages/Products";
-import Blog from "./pages/Blog";
+import Project from "./pages/Project";
+import Client from "./pages/Client";
+import Policy from "./pages/Policy";
 import Company from "./pages/Company";
-import User from "./pages/User";
+import Employee from "./pages/Employee";
 import NotFound from "./pages/Page404";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import Demo from "./pages/Demo";
 import { EditCompany } from "./components/_dashboard/company";
 
 // ----------------------------------------------------------------------
@@ -25,17 +24,16 @@ export default function Router() {
       path: "/dashboard",
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to='/dashboard/app' replace /> },
+        { element: <Navigate to="/dashboard/app" replace /> },
         { path: "app", element: <DashboardApp /> },
-        { path: "users", element: <User /> },
-        { path: "projects", element: <Products /> },
+        { path: "employees", element: <Employee /> },
+        { path: "projects", element: <Project /> },
         { path: "companies", element: <Company /> },
         { path: "companies/edit", element: <EditCompany /> },
-        { path: "clients", element: <Blog /> },
-        { path: "policies", element: <Blog /> },
+        { path: "clients", element: <Client /> },
+        { path: "policies", element: <Policy /> },
         { path: "profile", element: <Profile /> },
         { path: "profile/edit", element: <EditProfile /> },
-        { path: "demo", element: <Demo /> },
       ],
     },
     {
@@ -43,12 +41,11 @@ export default function Router() {
       element: <LogoOnlyLayout />,
       children: [
         { path: "login", element: <Login /> },
-        { path: "register", element: <Register /> },
         { path: "404", element: <NotFound /> },
-        { path: "/", element: <Navigate to='/login' /> },
-        { path: "*", element: <Navigate to='/404' /> },
+        { path: "/", element: <Navigate to="/login" /> },
+        { path: "*", element: <Navigate to="/404" /> },
       ],
     },
-    { path: "*", element: <Navigate to='/404' replace /> },
+    { path: "*", element: <Navigate to="/404" replace /> },
   ]);
 }

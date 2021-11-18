@@ -25,7 +25,7 @@ const DeletePopOver = ({ handleDelete, handleClose, open, anchorEl }) => {
       sx={{ width: "20%" }}
     >
       <Box sx={{ display: "flex", my: 1.5, px: 2.5 }}>
-        <Typography variant='subtitle1' noWrap>
+        <Typography variant="subtitle1" noWrap>
           {"Are you sure want to delete"}
         </Typography>
       </Box>
@@ -41,18 +41,18 @@ const DeletePopOver = ({ handleDelete, handleClose, open, anchorEl }) => {
         }}
       >
         <Button
-          color='error'
-          variant='outlined'
+          color="error"
+          variant="outlined"
           onClick={handleClose}
-          size='small'
+          size="small"
         >
           Cancel
         </Button>
         <Button
-          variant='contained'
-          color='success'
+          variant="contained"
+          color="success"
           onClick={handleDelete}
-          size='small'
+          size="small"
         >
           Okay
         </Button>

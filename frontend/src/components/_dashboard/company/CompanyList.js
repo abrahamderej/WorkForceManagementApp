@@ -36,7 +36,7 @@ import {
   UserListHead,
   UserListToolbar,
   UserMoreMenu,
-} from "../../../components/_dashboard/user";
+} from "../../../components/_dashboard/employee";
 //
 import USERLIST from "../../../_mocks_/user";
 
@@ -255,30 +255,30 @@ export default function CompanyList() {
                       hover
                       keyid={id}
                       tabIndex={-1}
-                      role='checkbox'
+                      role="checkbox"
                       selected={isItemSelected}
                       aria-checked={isItemSelected}
                     >
-                      <TableCell padding='checkbox'>
+                      <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
                           onChange={(event) => handleClick(event, id)}
                         />
                       </TableCell>
-                      <TableCell component='th' scope='row' padding='none'>
-                        <Stack direction='row' alignItems='center' spacing={2}>
+                      <TableCell component="th" scope="row" padding="none">
+                        <Stack direction="row" alignItems="center" spacing={2}>
                           <Avatar alt={name} src={companyLogo} />
-                          <Typography variant='subtitle2' noWrap>
+                          <Typography variant="subtitle2" noWrap>
                             {name}
                           </Typography>
                         </Stack>
                       </TableCell>
-                      <TableCell align='left'>{email}</TableCell>
-                      <TableCell align='left'>{phoneNumber}</TableCell>
-                      <TableCell align='left'>{address}</TableCell>
-                      <TableCell align='left'>{industry}</TableCell>
+                      <TableCell align="left">{email}</TableCell>
+                      <TableCell align="left">{phoneNumber}</TableCell>
+                      <TableCell align="left">{address}</TableCell>
+                      <TableCell align="left">{industry}</TableCell>
 
-                      <TableCell align='right'>
+                      <TableCell align="right">
                         <UserMoreMenu
                           handleEdit={(e) => {
                             handleEdit(e, id);
@@ -300,7 +300,7 @@ export default function CompanyList() {
             {isUserNotFound && (
               <TableBody>
                 <TableRow>
-                  <TableCell align='center' colSpan={6} sx={{ py: 3 }}>
+                  <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
                     <SearchNotFound searchQuery={filterName} />
                   </TableCell>
                 </TableRow>
@@ -312,7 +312,7 @@ export default function CompanyList() {
 
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
-        component='div'
+        component="div"
         count={companies.length}
         rowsPerPage={rowsPerPage}
         page={page}
